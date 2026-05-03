@@ -224,6 +224,8 @@ Type `/models` to see your available models — you should see **MiniMax M2.7** 
 1. Go to [https://github.com](https://github.com)
 2. Click **Sign up** and create a free account
 
+> ℹ️ **Age requirement:** GitHub allows accounts from age **13**. If you are between 13 and 17, you can create your own account — but let a parent know. If you are under 13, a parent or guardian must create the account for you.
+
 ### Install Git:
 
 **Git** is the tool that versions your code and lets you publish it to GitHub.

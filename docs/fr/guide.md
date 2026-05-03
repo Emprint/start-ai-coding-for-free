@@ -224,6 +224,8 @@ Tape `/models` pour voir tes modèles disponibles — tu devrais voir **MiniMax 
 1. Va sur [https://github.com](https://github.com)
 2. Clique sur **Sign up** et crée un compte gratuit
 
+> ℹ️ **Âge minimum :** GitHub autorise les comptes dès **13 ans**. Si tu as entre 13 et 17 ans, tu peux créer ton propre compte — mais pense à en informer un parent. Si tu as moins de 13 ans, c'est un parent ou tuteur qui doit créer le compte à ta place.
+
 ### Installer Git :
 
 **Git** est l'outil qui permet de versionner ton code et de le publier sur GitHub.
