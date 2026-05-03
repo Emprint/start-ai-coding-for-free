@@ -2,6 +2,8 @@
 
 > **Who is this for?** Complete beginners — including kids — who want to build web apps with AI help, for free.
 
+> 📅 **Guide created in May 2025.** The free models available on NVIDIA Build can change at any time: some may become paid, new ones may appear, or NVIDIA may modify or remove its free tier entirely. Always check what's available when you start a new project. The good news: OpenCode lets you switch models very easily, even in the middle of a session.
+
 ---
 
 ## Table of Contents
