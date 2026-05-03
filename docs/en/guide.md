@@ -51,8 +51,8 @@ NVIDIA offers **free** access to powerful AI models through its **NVIDIA Build**
 
 NVIDIA Build gives access to many AI models. Here's how to find a free one:
 
-1. Go to [https://build.nvidia.com/explore/discover](https://build.nvidia.com/explore/discover)
-2. Use the **Free** filter to show only free models
+1. Go to [https://build.nvidia.com/models](https://build.nvidia.com/models)
+2. Use the **Free Endpoint** filter to show only free models
 3. Click on a model to see its card — note the **API endpoint ID** (e.g. `mistralai/mistral-7b-instruct-v0.3`)
 
 ### Recommended models for beginners:

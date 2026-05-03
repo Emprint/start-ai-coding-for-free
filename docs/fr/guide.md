@@ -51,8 +51,8 @@ NVIDIA propose un accès **gratuit** à des modèles IA très puissants via sa p
 
 NVIDIA Build donne accès à de nombreux modèles IA. Voici comment en choisir un gratuit :
 
-1. Va sur [https://build.nvidia.com/explore/discover](https://build.nvidia.com/explore/discover)
-2. Utilise le filtre **Free** pour n'afficher que les modèles gratuits
+1. Va sur [https://build.nvidia.com/models](https://build.nvidia.com/models)
+2. Utilise le filtre **Free Endpoint** pour n'afficher que les modèles gratuits
 3. Clique sur un modèle pour voir sa fiche — note l'**API endpoint ID** (ex: `mistralai/mistral-7b-instruct-v0.3`)
 
 ### Modèles recommandés pour débutants :
