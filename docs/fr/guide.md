@@ -31,7 +31,9 @@ Pas besoin de connaissances en programmation — c'est fait pour les débutants 
 
 NVIDIA propose un accès **gratuit** à des modèles IA très puissants via sa plateforme **NVIDIA Build**.
 
-### Étapes :
+> ⚠️ **Important — âge minimum requis :** Les conditions d'utilisation de NVIDIA exigent que le compte soit créé par **un adulte ayant atteint l'âge de la majorité légale** dans son pays (18 ans en France, Belgique, Canada…). Si tu es mineur, c'est **un parent ou tuteur** qui doit créer le compte et gérer la clé API à ta place.
+
+### Étapes (à faire par un adulte si tu es mineur) :
 
 1. Va sur [https://build.nvidia.com](https://build.nvidia.com)
 2. Clique sur **Sign In / Create Account** en haut à droite

@@ -31,7 +31,9 @@ No programming knowledge required — this is made for beginners!
 
 NVIDIA offers **free** access to powerful AI models through its **NVIDIA Build** platform.
 
-### Steps:
+> ⚠️ **Age requirement:** NVIDIA's Terms of Use require the account to be created by **an adult of legal age of majority** in their country (18 in most countries). If you are a minor, a **parent or guardian** must create the account and manage the API key on your behalf.
+
+### Steps (must be done by an adult if you are a minor):
 
 1. Go to [https://build.nvidia.com](https://build.nvidia.com)
 2. Click **Sign In / Create Account** in the top-right corner
