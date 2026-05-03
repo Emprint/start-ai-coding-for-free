@@ -12,10 +12,9 @@
 2. [Créer un compte NVIDIA et obtenir une clé API gratuite](#2-créer-un-compte-nvidia-et-obtenir-une-clé-api-gratuite)
 3. [Choisir un modèle IA gratuit sur NVIDIA Build](#3-choisir-un-modèle-ia-gratuit-sur-nvidia-build)
 4. [Installer Node.js et OpenCode](#4-installer-nodejs-et-opencode)
-5. [Configurer OpenCode avec NVIDIA](#5-configurer-opencode-avec-nvidia)
-6. [Ajouter Playwright MCP (l'IA qui contrôle le navigateur)](#6-ajouter-playwright-mcp-lia-qui-contrôle-le-navigateur)
-7. [Créer ton premier projet sur GitHub](#7-créer-ton-premier-projet-sur-github)
-8. [Démarrer ton application web avec l'IA](#8-démarrer-ton-application-web-avec-lia)
+5. [Configurer OpenCode avec NVIDIA et Playwright MCP](#5-configurer-opencode-avec-nvidia-et-playwright-mcp)
+6. [Créer ton compte GitHub et installer Git](#6-créer-ton-compte-github-et-installer-git)
+7. [Construire ton application web avec l'IA](#7-construire-ton-application-web-avec-lia)
 
 ---
 
@@ -54,8 +53,9 @@ NVIDIA propose un accès **gratuit** à des modèles IA très puissants via sa p
 NVIDIA Build donne accès à de nombreux modèles IA. Voici comment en choisir un gratuit :
 
 1. Va sur [https://build.nvidia.com/models](https://build.nvidia.com/models)
-2. Utilise le filtre **Free Endpoint** pour n'afficher que les modèles gratuits
-3. Clique sur un modèle pour voir sa fiche — note l'**API endpoint ID** (ex: `mistralai/mistral-7b-instruct-v0.3`)
+2. Clique sur le filtre **Free Endpoint**
+3. Clique sur **Apply** pour appliquer le filtre — la liste se met à jour avec uniquement les modèles gratuits
+4. Clique sur un modèle pour voir sa fiche — note l'**API endpoint ID** (ex: `mistralai/mistral-7b-instruct-v0.3`)
 
 ### Modèles recommandés pour débutants :
 
@@ -71,97 +71,85 @@ NVIDIA Build donne accès à de nombreux modèles IA. Voici comment en choisir u
 
 ## 4. Installer Node.js et OpenCode
 
-**Node.js** est nécessaire pour OpenCode, Playwright MCP et le développement web en général — autant l'installer en premier. On installe ensuite OpenCode via `npm`.
+**Node.js** est un environnement qui permet d'exécuter du code en dehors d'un navigateur — il est nécessaire pour OpenCode et Playwright. On l'installe en premier, puis on installe OpenCode.
+
+> 💡 **C'est quoi le terminal ?** C'est une fenêtre où tu tapes des commandes textuelles pour interagir avec ton ordinateur. Sur macOS, cherche "Terminal" dans Spotlight (⌘+Espace). Sur Windows, cherche "PowerShell" dans le menu Démarrer. Sur Linux, cherche "Terminal" dans les applications.
 
 ### Sur macOS :
 
-Ouvre le **Terminal** (⌘+Espace, cherche "Terminal") et tape :
+1. Va sur [https://nodejs.org](https://nodejs.org) et télécharge la version **LTS**
+2. Lance l'installateur `.pkg` et suis les étapes
+3. Ouvre le **Terminal**, puis tape :
 
 ```bash
-# Installer Homebrew si pas encore installé
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Installer Node.js
-brew install node
-
-# Installer OpenCode
 npm install -g opencode-ai
 ```
 
 ### Sur Linux (Ubuntu/Debian) :
 
+Ouvre un **Terminal** et tape :
+
 ```bash
-# Installer Node.js et npm
 sudo apt update && sudo apt install nodejs npm
-
-# Installer OpenCode
 npm install -g opencode-ai
 ```
 
-### Sur Windows (PowerShell — WSL non requis) :
+### Sur Windows :
 
-Ouvre **PowerShell** (menu Démarrer → cherche "PowerShell") et choisis une des options :
-
-**Option A — Via Chocolatey** (gestionnaire de paquets recommandé) :
-```powershell
-# Installer Chocolatey si pas encore installé (PowerShell en mode administrateur)
-Set-ExecutionPolicy Bypass -Scope Process -Force
-[System.Net.ServicePointManager]::SecurityProtocol = 3072
-iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-# Installer Node.js
-choco install nodejs
-
-# Installer OpenCode
-npm install -g opencode-ai
-```
-
-**Option B — Via Scoop** :
-```powershell
-# Installer Scoop si pas encore installé
-iwr -useb get.scoop.sh | iex
-
-# Installer Node.js
-scoop install nodejs
-
-# Installer OpenCode
-npm install -g opencode-ai
-```
-
-**Option C — Téléchargement direct** :
+**Option A — Téléchargement direct (recommandé pour les débutants) :**
 1. Va sur [https://nodejs.org](https://nodejs.org) et télécharge la version **LTS**
-2. Lance l'installateur et suis les étapes
-3. Ouvre un **nouveau** PowerShell, puis :
+2. Lance l'installateur `.msi` et suis les étapes
+3. Ouvre **PowerShell** (menu Démarrer → "PowerShell"), puis tape :
+
 ```powershell
 npm install -g opencode-ai
 ```
 
-> 💡 **Conseil Windows** : Installe [Windows Terminal](https://aka.ms/terminal) (gratuit sur le Microsoft Store) pour une bien meilleure expérience en ligne de commande.
+**Option B — Via Chocolatey** (gestionnaire de paquets Windows) :
+```powershell
+# Dans PowerShell en mode administrateur :
+choco install nodejs
+npm install -g opencode-ai
+```
+
+**Option C — Via Scoop** :
+```powershell
+scoop install nodejs
+npm install -g opencode-ai
+```
+
+> 💡 **Conseil Windows** : Installe [Windows Terminal](https://aka.ms/terminal) (gratuit sur le Microsoft Store) pour une meilleure expérience en ligne de commande.
 
 ### Vérifier l'installation :
 
+Dans ton terminal, tape les commandes suivantes pour vérifier que tout est bien installé :
+
 ```bash
-node --version      # ex : v22.11.0 ✅
-opencode --version  # ex : 1.14.25 ✅
+node --version      # doit afficher quelque chose comme v22.11.0
+opencode --version  # doit afficher quelque chose comme 1.14.25
 ```
+
+Si les deux commandes affichent un numéro de version, c'est parfait ! ✅
 
 ---
 
-## 5. Configurer OpenCode avec NVIDIA
+## 5. Configurer OpenCode avec NVIDIA et Playwright MCP
 
-OpenCode a besoin de savoir comment se connecter à NVIDIA. On va créer un fichier de configuration.
+OpenCode a besoin de savoir comment se connecter à NVIDIA. On va créer un fichier de configuration qui inclut également **Playwright MCP** — l'outil qui permet à l'IA de contrôler un navigateur web.
 
 ### Lancer OpenCode une première fois :
 
-Lance OpenCode depuis n'importe quel dossier — il crée automatiquement son dossier de configuration au démarrage :
+OpenCode crée automatiquement son dossier de configuration au premier démarrage. Lance-le depuis n'importe quel dossier :
 
 ```bash
 opencode
 ```
 
-Appuie sur **q** pour quitter dès que l'interface s'affiche. Le dossier `~/.config/opencode/` existe maintenant.
+Appuie sur **q** pour quitter dès que l'interface s'affiche. Le dossier de configuration a été créé.
 
 ### Ouvrir le fichier de config :
+
+Dans ton terminal, ouvre le fichier de configuration :
 
 ```bash
 # Sur macOS / Linux :
@@ -171,61 +159,9 @@ nano ~/.config/opencode/opencode.json
 notepad "$HOME\.config\opencode\opencode.json"
 ```
 
-Colle ce contenu (remplace `TA_CLE_API` par ta vraie clé NVIDIA) :
+### Coller la configuration complète :
 
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "provider": {
-    "nvidia-build": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "NVIDIA Build",
-      "options": {
-        "baseURL": "https://integrate.api.nvidia.com/v1",
-        "apiKey": "TA_CLE_API"
-      },
-      "models": {
-        "minimaxai/minimax-m2.7": {
-          "name": "MiniMax M2.7 (gratuit)",
-          "tool_call": true,
-          "limit": { "context": 204800, "output": 8192 }
-        },
-        "z-ai/glm4.7": {
-          "name": "GLM 4.7 (gratuit)",
-          "tool_call": true,
-          "limit": { "context": 131072, "output": 8192 }
-        }
-      }
-    }
-  }
-}
-```
-
-Sauvegarde avec **Ctrl+O** puis **Entrée**, puis quitte avec **Ctrl+X** (ou simplement sauvegarde et ferme sur Windows).
-
-### Tester la connexion :
-
-Lance OpenCode dans un dossier quelconque :
-
-```bash
-cd ~
-opencode
-```
-
-La première fois, OpenCode télécharge les paquets nécessaires (environ 1 minute).  
-Tape `/models` pour voir tes modèles disponibles — tu devrais voir **MiniMax M2.7** et **GLM 4.7**. ✅
-
----
-
-## 6. Ajouter Playwright MCP (l'IA qui contrôle le navigateur)
-
-**Playwright MCP** donne à l'IA la capacité d'ouvrir un navigateur web, de cliquer sur des boutons, de remplir des formulaires et de prendre des captures d'écran — comme un humain le ferait.
-
-> Node.js est déjà installé depuis l'étape 4, pas besoin de le réinstaller.
-
-### Ajouter Playwright MCP à la config OpenCode :
-
-Modifie ton fichier `~/.config/opencode/opencode.json` pour y ajouter la section `mcp` :
+Remplace tout le contenu du fichier par ce qui suit (remplace `TA_CLE_API` par ta vraie clé NVIDIA) :
 
 ```json
 {
@@ -262,17 +198,25 @@ Modifie ton fichier `~/.config/opencode/opencode.json` pour y ajouter la section
 }
 ```
 
-### Installer les navigateurs Playwright :
+Sauvegarde avec **Ctrl+O** puis **Entrée**, puis quitte avec **Ctrl+X** (ou simplement sauvegarde et ferme sur Windows).
+
+### Tester la connexion :
+
+Lance OpenCode dans un dossier quelconque :
 
 ```bash
-npx playwright install chromium
+cd ~
+opencode
 ```
 
-> 💡 Avec Playwright MCP, tu peux demander à l'IA : *"Ouvre mon application dans le navigateur et teste si le bouton fonctionne"* — elle le fera automatiquement !
+La première fois, OpenCode télécharge les paquets nécessaires (environ 1 minute).  
+Tape `/models` pour voir tes modèles disponibles — tu devrais voir **MiniMax M2.7** et **GLM 4.7**. ✅
+
+> 💡 Playwright MCP télécharge automatiquement un navigateur lors de sa première utilisation. Si tu obtiens une erreur liée au navigateur, exécute `npx playwright install chromium` dans ton terminal.
 
 ---
 
-## 7. Créer ton premier projet sur GitHub
+## 6. Créer ton compte GitHub et installer Git
 
 **GitHub** est un service gratuit pour stocker ton code en ligne et le partager avec le monde.
 
@@ -281,60 +225,50 @@ npx playwright install chromium
 1. Va sur [https://github.com](https://github.com)
 2. Clique sur **Sign up** et crée un compte gratuit
 
-### Créer un nouveau dépôt (repository) :
+### Installer Git :
 
-1. Une fois connecté, clique sur le **+** en haut à droite → **New repository**
-2. Donne un nom à ton projet (ex: `ma-premiere-app-web`)
-3. Coche **Add a README file**
-4. Choisis **Public** (pour que tout le monde puisse le voir)
-5. Clique sur **Create repository**
+**Git** est l'outil qui permet de versionner ton code et de le publier sur GitHub.
 
-### Installer Git et cloner ton projet :
+**Sur macOS :**  
+Dans le Terminal, tape `git --version`. Si Git n'est pas encore installé, macOS te proposera automatiquement de l'installer — clique sur **Installer** et suis les étapes.
 
+**Sur Linux (Ubuntu/Debian) :**
 ```bash
-# Sur macOS :
-brew install git
-brew install gh
-
-# Sur Linux (Ubuntu/Debian) :
 sudo apt install git
-sudo apt install gh  # ou : curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee ...
-
-# Sur Windows (PowerShell) :
-choco install git
-choco install gh
-# ou via Scoop :
-scoop install git
-scoop install gh
 ```
 
+**Sur Windows :**  
+Télécharge et installe **Git for Windows** depuis [https://git-scm.com/download/win](https://git-scm.com/download/win). L'installateur est simple et guidé.
+
+### Installer le GitHub CLI (gh) :
+
+**gh** est l'outil officiel de GitHub en ligne de commande — il simplifie l'authentification et la création de dépôts.
+
+Télécharge l'installateur pour ton système depuis [https://cli.github.com](https://cli.github.com) et suis les instructions.
+
+### Configurer ton identité et se connecter :
+
+Dans ton terminal, tape :
+
 ```bash
-# Configurer ton identité Git (tous les systèmes) :
 git config --global user.name "Ton Prénom"
 git config --global user.email "ton@email.com"
-
-# S'authentifier avec GitHub :
 gh auth login
 ```
 
-### Cloner ton projet sur ton ordinateur :
-
-```bash
-cd ~/Documents
-gh repo clone TON_NOM_UTILISATEUR/ma-premiere-app-web
-cd ma-premiere-app-web
-```
+Suis les étapes à l'écran pour t'authentifier avec ton compte GitHub.
 
 ---
 
-## 8. Démarrer ton application web avec l'IA
+## 7. Construire ton application web avec l'IA
 
-Maintenant tu es prêt ! Voici comment travailler avec l'IA pour créer une application web.
+Tu es maintenant prêt ! Voici comment créer une application web complète avec l'aide de l'IA.
 
-### Lancer OpenCode dans ton projet :
+### Créer ton dossier de projet :
 
 ```bash
-cd ~/Documents/ma-premiere-app-web
+mkdir mon-projet
+cd mon-projet
 opencode
 ```
 
@@ -342,7 +276,7 @@ opencode
 
 Tape `/models` et sélectionne **MiniMax M2.7** ou **GLM 4.7**.
 
-### Exemples de prompts pour démarrer :
+### Demander à l'IA de créer ton application :
 
 Tu peux écrire des instructions en français directement à l'IA :
 
@@ -352,36 +286,37 @@ L'utilisateur doit pouvoir ajouter une tâche, la cocher comme terminée, et la 
 Utilise du CSS moderne pour rendre l'interface jolie et responsive.
 ```
 
+L'IA va créer tous les fichiers nécessaires et écrire le code complet.
+
+### Tester avec Playwright :
+
+Une fois l'application créée, demande à l'IA de la tester dans un navigateur :
+
 ```
-Crée un jeu de memory en HTML/CSS/JavaScript avec 12 cartes.
-Les cartes doivent se retourner avec une animation fluide.
-Ajoute un compteur de tentatives et un chronomètre.
-```
-
-L'IA va :
-1. Créer les fichiers nécessaires
-2. Écrire le code complet
-3. Corriger les erreurs automatiquement
-
-### Publier ton projet sur GitHub :
-
-```bash
-git add .
-git commit -m "Mon premier projet avec l'IA"
-git push
+Utilise Playwright pour ouvrir mon application dans un navigateur et vérifie que les
+fonctionnalités principales fonctionnent correctement. Fais-moi un rapport de ce que tu as testé.
 ```
 
-Ton code est maintenant en ligne sur GitHub ! 🎉
+L'IA va ouvrir un navigateur, cliquer sur les éléments et te signaler tout problème. 🤖
 
-### Partager avec des amis :
+### Publier sur GitHub :
 
-Ton projet est visible à l'adresse :  
-`https://github.com/TON_NOM_UTILISATEUR/ma-premiere-app-web`
+Quand tu es satisfait du résultat, demande à l'IA de créer un dépôt GitHub et d'y publier ton code :
 
-Tu peux aussi activer **GitHub Pages** pour mettre ton application en ligne gratuitement :
-1. Va dans les paramètres de ton dépôt → **Pages**
-2. Sélectionne la branche **main**
-3. Ton site sera disponible à : `https://TON_NOM_UTILISATEUR.github.io/ma-premiere-app-web`
+```
+Crée un dépôt GitHub public pour ce projet, appelle-le "mon-projet-web", et pousse tout le code dessus.
+```
+
+L'IA utilisera `gh repo create` et `git push` pour tout faire automatiquement.
+
+### Mettre ton site en ligne avec GitHub Pages :
+
+Une fois le code sur GitHub, tu peux héberger ton application gratuitement :
+
+1. Va sur ton dépôt GitHub (ex: `https://github.com/TON_NOM/mon-projet-web`)
+2. Clique sur **Settings** → **Pages**
+3. Dans **Source**, sélectionne la branche **main**
+4. Ton site sera disponible à : `https://TON_NOM.github.io/mon-projet-web` 🎉
 
 ---
 
@@ -389,7 +324,7 @@ Tu peux aussi activer **GitHub Pages** pour mettre ton application en ligne grat
 
 - Essaie de demander à l'IA de **modifier** quelque chose dans ton projet
 - Demande-lui d'**expliquer** le code qu'elle a écrit
-- Lance une session avec Playwright : *"Ouvre mon application dans le navigateur et dis-moi si tout fonctionne"*
+- Crée un deuxième projet : un jeu, une calculatrice, un portfolio...
 - Explore d'autres modèles gratuits sur [build.nvidia.com](https://build.nvidia.com)
 
 ---
@@ -400,10 +335,13 @@ Tu peux aussi activer **GitHub Pages** pour mettre ton application en ligne grat
 → Vérifie que ta clé API est correcte dans `~/.config/opencode/opencode.json`
 
 **Playwright ne se lance pas :**  
-→ Lance `npx playwright install chromium` puis réessaie
+→ Lance `npx playwright install chromium` dans le terminal puis réessaie
 
 **Git me demande un mot de passe :**  
 → Lance `gh auth login` et suis les étapes
+
+**`npm install -g opencode-ai` affiche une erreur de permission :**  
+→ Sur macOS/Linux, ajoute `sudo` devant : `sudo npm install -g opencode-ai`
 
 ---
 
