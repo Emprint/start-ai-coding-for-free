@@ -61,7 +61,6 @@ NVIDIA Build gives access to many AI models. Here's how to find a free one:
 
 | Model | Specialty | Highlights |
 |---|---|---|
-| `mistralai/mistral-7b-instruct-v0.3` | General | Fast, lightweight, great to start |
 | `minimaxai/minimax-m2.7` | Coding | Very capable, 204K context |
 | `z-ai/glm4.7` | Coding & reasoning | 358B parameters, very powerful |
 
@@ -79,7 +78,7 @@ NVIDIA Build gives access to many AI models. Here's how to find a free one:
 
 1. Go to [https://nodejs.org](https://nodejs.org) and download the **LTS** version
 2. Run the `.pkg` installer and follow the steps
-3. Open the **Terminal**, then type:
+3. Once the installation is complete, open the **Terminal** (⌘+Space, search "Terminal") and type:
 
 ```bash
 npm install -g opencode-ai
@@ -271,6 +270,10 @@ mkdir my-project
 cd my-project
 opencode
 ```
+
+- `mkdir my-project` — creates a new folder called `my-project`
+- `cd my-project` — moves into that folder (cd = *change directory*)
+- `opencode` — launches the OpenCode tool inside that folder
 
 ### Choose your model:
 

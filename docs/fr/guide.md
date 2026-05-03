@@ -61,7 +61,6 @@ NVIDIA Build donne accès à de nombreux modèles IA. Voici comment en choisir u
 
 | Modèle | Spécialité | Points forts |
 |---|---|---|
-| `mistralai/mistral-7b-instruct-v0.3` | Général | Rapide, léger, parfait pour commencer |
 | `minimaxai/minimax-m2.7` | Codage | Très capable, 204K contexte |
 | `z-ai/glm4.7` | Codage & raisonnement | 358B paramètres, très puissant |
 
@@ -79,7 +78,7 @@ NVIDIA Build donne accès à de nombreux modèles IA. Voici comment en choisir u
 
 1. Va sur [https://nodejs.org](https://nodejs.org) et télécharge la version **LTS**
 2. Lance l'installateur `.pkg` et suis les étapes
-3. Ouvre le **Terminal**, puis tape :
+3. Une fois l'installation terminée, ouvre le **Terminal** (⌘+Espace, cherche "Terminal") et tape :
 
 ```bash
 npm install -g opencode-ai
@@ -271,6 +270,10 @@ mkdir mon-projet
 cd mon-projet
 opencode
 ```
+
+- `mkdir mon-projet` — crée un nouveau dossier appelé `mon-projet`
+- `cd mon-projet` — entre dans ce dossier (cd = *change directory*)
+- `opencode` — lance l'outil OpenCode dans ce dossier
 
 ### Choisir ton modèle :
 
