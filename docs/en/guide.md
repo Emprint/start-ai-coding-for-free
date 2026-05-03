@@ -11,7 +11,7 @@
 1. [What you need](#1-what-you-need)
 2. [Create an NVIDIA account and get a free API key](#2-create-an-nvidia-account-and-get-a-free-api-key)
 3. [Choose a free AI model on NVIDIA Build](#3-choose-a-free-ai-model-on-nvidia-build)
-4. [Install OpenCode](#4-install-opencode)
+4. [Install Node.js and OpenCode](#4-install-nodejs-and-opencode)
 5. [Configure OpenCode with NVIDIA](#5-configure-opencode-with-nvidia)
 6. [Add Playwright MCP (AI that controls your browser)](#6-add-playwright-mcp-ai-that-controls-your-browser)
 7. [Create your first GitHub project](#7-create-your-first-github-project)
@@ -21,7 +21,7 @@
 
 ## 1. What you need
 
-- A computer running **macOS** or **Linux** (or Windows with WSL)
+- A computer running **macOS**, **Linux**, or **Windows** (native PowerShell — WSL not required)
 - An internet connection
 - About **30 minutes** to set everything up
 
@@ -69,35 +69,81 @@ NVIDIA Build gives access to many AI models. Here's how to find a free one:
 
 ---
 
-## 4. Install OpenCode
+## 4. Install Node.js and OpenCode
 
-**OpenCode** is an AI agent that runs in your terminal. It reads your files, writes code, runs commands — all by following your plain-language instructions.
+**Node.js** is needed for OpenCode, Playwright MCP, and web development in general — so we install it first. We then install OpenCode through `npm`.
 
 ### On macOS:
 
-Open the **Terminal** (search "Terminal" in Spotlight with ⌘+Space) and type:
+Open the **Terminal** (⌘+Space, search "Terminal") and type:
 
 ```bash
 # Install Homebrew if not already installed
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# Install Node.js
+brew install node
+
 # Install OpenCode
-brew install anomalyco/tap/opencode
+npm install -g opencode-ai
 ```
 
-### On Linux:
+### On Linux (Ubuntu/Debian):
 
 ```bash
-curl -fsSL https://opencode.ai/install | bash
+# Install Node.js and npm
+sudo apt update && sudo apt install nodejs npm
+
+# Install OpenCode
+npm install -g opencode-ai
 ```
+
+### On Windows (PowerShell — WSL not required):
+
+Open **PowerShell** (Start menu → search "PowerShell") and choose one of these options:
+
+**Option A — Via Chocolatey** (recommended package manager):
+```powershell
+# Install Chocolatey if not already installed (run PowerShell as Administrator)
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# Install Node.js
+choco install nodejs
+
+# Install OpenCode
+npm install -g opencode-ai
+```
+
+**Option B — Via Scoop**:
+```powershell
+# Install Scoop if not already installed
+iwr -useb get.scoop.sh | iex
+
+# Install Node.js
+scoop install nodejs
+
+# Install OpenCode
+npm install -g opencode-ai
+```
+
+**Option C — Direct download**:
+1. Go to [https://nodejs.org](https://nodejs.org) and download the **LTS** version
+2. Run the installer and follow the steps
+3. Open a **new** PowerShell window, then:
+```powershell
+npm install -g opencode-ai
+```
+
+> 💡 **Windows tip**: Install [Windows Terminal](https://aka.ms/terminal) (free on the Microsoft Store) for a much better command-line experience.
 
 ### Verify the installation:
 
 ```bash
-opencode --version
+node --version      # e.g. v22.11.0 ✅
+opencode --version  # e.g. 1.14.25 ✅
 ```
-
-You should see something like `1.14.25`. ✅
 
 ---
 
@@ -105,17 +151,24 @@ You should see something like `1.14.25`. ✅
 
 OpenCode needs to know how to connect to NVIDIA. We'll create a configuration file.
 
-### Create the config file:
+### Launch OpenCode once first:
+
+Run OpenCode from any folder — it automatically creates its config folder on first start:
 
 ```bash
-mkdir -p ~/.config/opencode
+opencode
 ```
 
-Open a text editor and create `~/.config/opencode/opencode.json`:
+Press **q** to quit as soon as the interface appears. The `~/.config/opencode/` folder now exists.
+
+### Open the config file:
 
 ```bash
-# On macOS, you can use nano:
+# On macOS / Linux:
 nano ~/.config/opencode/opencode.json
+
+# On Windows (PowerShell):
+notepad "$HOME\.config\opencode\opencode.json"
 ```
 
 Paste this content (replace `YOUR_API_KEY` with your actual NVIDIA key):
@@ -148,7 +201,7 @@ Paste this content (replace `YOUR_API_KEY` with your actual NVIDIA key):
 }
 ```
 
-Save with **Ctrl+O** then **Enter**, then exit with **Ctrl+X**.
+Save with **Ctrl+O** then **Enter**, then exit with **Ctrl+X** (or just save and close on Windows).
 
 ### Test the connection:
 
@@ -168,15 +221,7 @@ Type `/models` to see your available models — you should see **MiniMax M2.7** 
 
 **Playwright MCP** gives the AI the ability to open a web browser, click buttons, fill forms and take screenshots — just like a human would.
 
-### Install Node.js and npx (required for Playwright):
-
-```bash
-# On macOS:
-brew install node
-
-# On Linux (Ubuntu/Debian):
-sudo apt install nodejs npm
-```
+> Node.js is already installed from step 4 — no need to reinstall it.
 
 ### Add Playwright MCP to the OpenCode config:
 
@@ -249,13 +294,26 @@ npx playwright install chromium
 ```bash
 # On macOS:
 brew install git
+brew install gh
 
-# Configure your Git identity:
+# On Linux (Ubuntu/Debian):
+sudo apt install git
+sudo apt install gh  # or follow: https://cli.github.com
+
+# On Windows (PowerShell):
+choco install git
+choco install gh
+# or via Scoop:
+scoop install git
+scoop install gh
+```
+
+```bash
+# Configure your Git identity (all platforms):
 git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
 
-# Install gh (GitHub CLI) to make authentication easier:
-brew install gh
+# Authenticate with GitHub:
 gh auth login
 ```
 

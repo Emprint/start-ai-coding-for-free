@@ -11,7 +11,7 @@
 1. [Ce dont tu as besoin](#1-ce-dont-tu-as-besoin)
 2. [Créer un compte NVIDIA et obtenir une clé API gratuite](#2-créer-un-compte-nvidia-et-obtenir-une-clé-api-gratuite)
 3. [Choisir un modèle IA gratuit sur NVIDIA Build](#3-choisir-un-modèle-ia-gratuit-sur-nvidia-build)
-4. [Installer OpenCode](#4-installer-opencode)
+4. [Installer Node.js et OpenCode](#4-installer-nodejs-et-opencode)
 5. [Configurer OpenCode avec NVIDIA](#5-configurer-opencode-avec-nvidia)
 6. [Ajouter Playwright MCP (l'IA qui contrôle le navigateur)](#6-ajouter-playwright-mcp-lia-qui-contrôle-le-navigateur)
 7. [Créer ton premier projet sur GitHub](#7-créer-ton-premier-projet-sur-github)
@@ -21,7 +21,7 @@
 
 ## 1. Ce dont tu as besoin
 
-- Un ordinateur sous **macOS** ou **Linux** (ou Windows avec WSL)
+- Un ordinateur sous **macOS**, **Linux** ou **Windows** (PowerShell natif, WSL non obligatoire)
 - Une connexion internet
 - Environ **30 minutes** pour tout installer
 
@@ -69,35 +69,81 @@ NVIDIA Build donne accès à de nombreux modèles IA. Voici comment en choisir u
 
 ---
 
-## 4. Installer OpenCode
+## 4. Installer Node.js et OpenCode
 
-**OpenCode** est un agent IA qui tourne dans ton terminal. Il lit tes fichiers, écrit du code, exécute des commandes — tout ça en suivant tes instructions en langage naturel.
+**Node.js** est nécessaire pour OpenCode, Playwright MCP et le développement web en général — autant l'installer en premier. On installe ensuite OpenCode via `npm`.
 
 ### Sur macOS :
 
-Ouvre le **Terminal** (cherche "Terminal" dans Spotlight avec ⌘+Espace) et tape :
+Ouvre le **Terminal** (⌘+Espace, cherche "Terminal") et tape :
 
 ```bash
 # Installer Homebrew si pas encore installé
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# Installer Node.js
+brew install node
+
 # Installer OpenCode
-brew install anomalyco/tap/opencode
+npm install -g opencode-ai
 ```
 
-### Sur Linux :
+### Sur Linux (Ubuntu/Debian) :
 
 ```bash
-curl -fsSL https://opencode.ai/install | bash
+# Installer Node.js et npm
+sudo apt update && sudo apt install nodejs npm
+
+# Installer OpenCode
+npm install -g opencode-ai
 ```
+
+### Sur Windows (PowerShell — WSL non requis) :
+
+Ouvre **PowerShell** (menu Démarrer → cherche "PowerShell") et choisis une des options :
+
+**Option A — Via Chocolatey** (gestionnaire de paquets recommandé) :
+```powershell
+# Installer Chocolatey si pas encore installé (PowerShell en mode administrateur)
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# Installer Node.js
+choco install nodejs
+
+# Installer OpenCode
+npm install -g opencode-ai
+```
+
+**Option B — Via Scoop** :
+```powershell
+# Installer Scoop si pas encore installé
+iwr -useb get.scoop.sh | iex
+
+# Installer Node.js
+scoop install nodejs
+
+# Installer OpenCode
+npm install -g opencode-ai
+```
+
+**Option C — Téléchargement direct** :
+1. Va sur [https://nodejs.org](https://nodejs.org) et télécharge la version **LTS**
+2. Lance l'installateur et suis les étapes
+3. Ouvre un **nouveau** PowerShell, puis :
+```powershell
+npm install -g opencode-ai
+```
+
+> 💡 **Conseil Windows** : Installe [Windows Terminal](https://aka.ms/terminal) (gratuit sur le Microsoft Store) pour une bien meilleure expérience en ligne de commande.
 
 ### Vérifier l'installation :
 
 ```bash
-opencode --version
+node --version      # ex : v22.11.0 ✅
+opencode --version  # ex : 1.14.25 ✅
 ```
-
-Tu devrais voir quelque chose comme `1.14.25`. ✅
 
 ---
 
@@ -105,17 +151,24 @@ Tu devrais voir quelque chose comme `1.14.25`. ✅
 
 OpenCode a besoin de savoir comment se connecter à NVIDIA. On va créer un fichier de configuration.
 
-### Créer le fichier de config :
+### Lancer OpenCode une première fois :
+
+Lance OpenCode depuis n'importe quel dossier — il crée automatiquement son dossier de configuration au démarrage :
 
 ```bash
-mkdir -p ~/.config/opencode
+opencode
 ```
 
-Ouvre un éditeur de texte et crée le fichier `~/.config/opencode/opencode.json` :
+Appuie sur **q** pour quitter dès que l'interface s'affiche. Le dossier `~/.config/opencode/` existe maintenant.
+
+### Ouvrir le fichier de config :
 
 ```bash
-# Sur macOS, tu peux utiliser nano :
+# Sur macOS / Linux :
 nano ~/.config/opencode/opencode.json
+
+# Sur Windows (PowerShell) :
+notepad "$HOME\.config\opencode\opencode.json"
 ```
 
 Colle ce contenu (remplace `TA_CLE_API` par ta vraie clé NVIDIA) :
@@ -148,7 +201,7 @@ Colle ce contenu (remplace `TA_CLE_API` par ta vraie clé NVIDIA) :
 }
 ```
 
-Sauvegarde avec **Ctrl+O** puis **Entrée**, puis quitte avec **Ctrl+X**.
+Sauvegarde avec **Ctrl+O** puis **Entrée**, puis quitte avec **Ctrl+X** (ou simplement sauvegarde et ferme sur Windows).
 
 ### Tester la connexion :
 
@@ -168,15 +221,7 @@ Tape `/models` pour voir tes modèles disponibles — tu devrais voir **MiniMax 
 
 **Playwright MCP** donne à l'IA la capacité d'ouvrir un navigateur web, de cliquer sur des boutons, de remplir des formulaires et de prendre des captures d'écran — comme un humain le ferait.
 
-### Installer Node.js et npx (nécessaire pour Playwright) :
-
-```bash
-# Sur macOS :
-brew install node
-
-# Sur Linux (Ubuntu/Debian) :
-sudo apt install nodejs npm
-```
+> Node.js est déjà installé depuis l'étape 4, pas besoin de le réinstaller.
 
 ### Ajouter Playwright MCP à la config OpenCode :
 
@@ -249,13 +294,26 @@ npx playwright install chromium
 ```bash
 # Sur macOS :
 brew install git
+brew install gh
 
-# Configurer ton identité Git :
+# Sur Linux (Ubuntu/Debian) :
+sudo apt install git
+sudo apt install gh  # ou : curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee ...
+
+# Sur Windows (PowerShell) :
+choco install git
+choco install gh
+# ou via Scoop :
+scoop install git
+scoop install gh
+```
+
+```bash
+# Configurer ton identité Git (tous les systèmes) :
 git config --global user.name "Ton Prénom"
 git config --global user.email "ton@email.com"
 
-# Installer gh (GitHub CLI) pour faciliter l'authentification :
-brew install gh
+# S'authentifier avec GitHub :
 gh auth login
 ```
 
