@@ -2,7 +2,7 @@
 
 > **Pour qui ?** Les débutants complets, y compris les enfants, qui veulent créer des applications web avec l'aide de l'IA — sans payer.
 
-> 📅 **Guide créé en mai 2025.** Les modèles gratuits disponibles sur NVIDIA Build peuvent changer à tout moment : certains peuvent devenir payants, de nouveaux peuvent apparaître, ou NVIDIA peut modifier son offre gratuite. Vérifie toujours la liste des modèles disponibles au moment où tu démarres un projet. La bonne nouvelle : OpenCode te permet de changer de modèle très facilement, même en cours de session.
+> 📅 **Guide créé en mai 2026.** Les modèles gratuits disponibles sur NVIDIA Build peuvent changer à tout moment : certains peuvent devenir payants, de nouveaux peuvent apparaître, ou NVIDIA peut modifier son offre gratuite. Vérifie toujours la liste des modèles disponibles au moment où tu démarres un projet. La bonne nouvelle : OpenCode te permet de changer de modèle très facilement, même en cours de session.
 
 ---
 
